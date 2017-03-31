@@ -40,7 +40,7 @@ RUN echo "date.timezone = PRC\n"\
     "max_execution_time = 60\n" \
     "log_errors = On\n" \
     "error_log = /dev/stderr\n" >> /usr/local/etc/php/php.ini
-
+RUN sed -i "s/pm.max_children = 5/pm.max_children = 100" >> /usr/local/etc/php-fpm.d/www.conf && sed -i "s/pm.max_children = 5/pm.max_children = 100" >> /usr/local/etc/php-fpm.d/www.conf.default
 # clean
 RUN apt-get remove -y build-essential libmemcached-dev libz-dev git \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
