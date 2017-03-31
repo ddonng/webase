@@ -40,7 +40,16 @@ RUN echo "date.timezone = PRC\n"\
     "max_execution_time = 60\n" \
     "log_errors = On\n" \
     "error_log = /dev/stderr\n" >> /usr/local/etc/php/php.ini
-RUN sed -i "s/pm.max_children = 5/pm.max_children = 100/g" /usr/local/etc/php-fpm.d/www.conf && sed -i "s/pm.max_children = 5/pm.max_children = 100/g" /usr/local/etc/php-fpm.d/www.conf.default
+RUN sed -i "s/pm.max_children = 5/pm.max_children = 50/g" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s/pm.max_children = 5/pm.max_children = 50/g" /usr/local/etc/php-fpm.d/www.conf.default \
+    && sed -i "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /usr/local/etc/php-fpm.d/www.conf.default \
+    && sed -i "s/pm.max_spare_servers = 3/pm.max_spare_servers = 16/g" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s/pm.max_spare_servers = 3/pm.max_spare_servers = 16/g" /usr/local/etc/php-fpm.d/www.conf.default \
+    && sed -i "s/pm.start_servers = 2/pm.start_servers = 9/g" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s/pm.start_servers = 2/pm.start_servers = 9/g" /usr/local/etc/php-fpm.d/www.conf.default \
+    && sed -i "s/;pm.max_requests = 500/pm.max_requests = 5000/g" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s/;pm.max_requests = 500/pm.max_requests = 5000/g" /usr/local/etc/php-fpm.d/www.conf.default \
 # clean
 RUN apt-get remove -y build-essential libmemcached-dev libz-dev git \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
