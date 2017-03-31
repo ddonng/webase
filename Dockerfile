@@ -49,7 +49,7 @@ RUN sed -i "s/pm.max_children = 5/pm.max_children = 50/g" /usr/local/etc/php-fpm
     && sed -i "s/pm.start_servers = 2/pm.start_servers = 9/g" /usr/local/etc/php-fpm.d/www.conf \
     && sed -i "s/pm.start_servers = 2/pm.start_servers = 9/g" /usr/local/etc/php-fpm.d/www.conf.default \
     && sed -i "s/;pm.max_requests = 500/pm.max_requests = 5000/g" /usr/local/etc/php-fpm.d/www.conf \
-    && sed -i "s/;pm.max_requests = 500/pm.max_requests = 5000/g" /usr/local/etc/php-fpm.d/www.conf.default \
+    && sed -i "s/;pm.max_requests = 500/pm.max_requests = 5000/g" /usr/local/etc/php-fpm.d/www.conf.default 
 # clean
 RUN apt-get remove -y build-essential libmemcached-dev libz-dev git \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
