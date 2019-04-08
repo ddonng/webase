@@ -15,7 +15,7 @@ RUN pecl install redis-3.0.0 \
     && echo "extension=redis.so" >> /usr/local/etc/php/conf.d/redis.ini
 
 RUN apt-get install -y pkg-config libssl-dev
-RUN pecl install mongodb-1.1.8 && echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+RUN pecl install mongodb-1.5.3 && echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
 # swoole extension
 RUN pecl install swoole-1.9.19 && echo extension=swoole.so >> /usr/local/etc/php/conf.d/swoole.ini
