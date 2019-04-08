@@ -38,7 +38,10 @@ RUN apt-get install -y \
 RUN docker-php-ext-install bcmath
 RUN echo "Asia/Shanghai" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
-
+RUN apt-get update && \
+     apt-get install -y \
+         zlib1g-dev \
+         && docker-php-ext-install zip
 RUN echo "date.timezone = PRC\n"\
     "memory_limit = 256M\n" \
     "upload_max_filesize = 200M\n" \
